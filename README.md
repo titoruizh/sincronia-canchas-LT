@@ -1,34 +1,53 @@
 # Proyecto Canchas AngloAmerican
 
 ## Resumen
+
 Este proyecto busca digitalizar y transparentar el flujo de trabajo de validación de canchas entre empresas colaboradoras de AngloAmerican, usando tecnologías web modernas (**Astro** como frontend y **Supabase** como backend).
+
+---
 
 ## Diagrama general del proceso entre empresas
 
 ```mermaid
 flowchart TD
-    AA[AngloAmerican (Mandante)] -->|Solicita cancha| BES[Besalco (Maquinarias)]
-    BES -->|Trabaja cancha| LIN[Linkapsis (Topografía)]
-    LIN -->|Valida espesores| LINCheck{¿Espesores OK?}
-    LINCheck -- Sí --> LLA[LlayLlay (Laboratorio)]
+    AA[AngloAmerican\nMandante] --> BES[Besalco\nMaquinarias]
+    BES --> LIN[Linkapsis\nTopografía]
+    LIN --> LINCheck{Espesores OK?}
+    LINCheck -- Sí --> LLA[LlayLlay\nLaboratorio]
     LINCheck -- No --> BES
-    LLA -->|Muestra densidad| LLAValida{¿Densidad OK?}
+    LLA --> LLAValida{Densidad OK?}
     LLAValida -- Sí --> AA
     LLAValida -- No --> BES
-    AA -->|Firma y cierra cancha| END[Cancha cerrada]
+    AA --> END[Cancha cerrada]
 ```
+**Explicación:**  
+1. AngloAmerican solicita la habilitación de una cancha.
+2. Besalco realiza los trabajos de maquinaria.
+3. Linkapsis valida los espesores y, si no cumplen, la cancha vuelve a Besalco para ser retrabajada.
+4. LlayLlay toma muestras de densidad y, si no cumplen, la cancha vuelve a Besalco para retrabajo.
+5. Si todo es validado, AngloAmerican firma el cierre de la cancha.
+
+---
 
 ## Diagrama técnico del flujo de desarrollo web
 
 ```mermaid
 flowchart TD
-    User[Usuario de empresa] -->|Login (Supabase Auth)| WebPanel[Web App (Astro)]
-    WebPanel -->|Consulta estado de canchas (Supabase DB)| Supabase[(Supabase)]
-    WebPanel -->|Visualiza mapa (Leaflet/MapLibre)| MapComponent[Componente de Mapa]
-    WebPanel -->|Realiza acción en proceso (validar, rechazar, firmar)| Supabase
-    Supabase -->|Actualiza estado| WebPanel
-    WebPanel -->|Notificación/Actualización en tiempo real| User
+    User[Usuario\nEmpresa] --> WebPanel[Web App\n(Astro)]
+    WebPanel --> Supabase[(Supabase)]
+    WebPanel --> MapComponent[Componente Mapa]
+    WebPanel --> Accion[Acciones\n(validar, rechazar, firmar)]
+    Accion --> Supabase
+    Supabase --> WebPanel
+    WebPanel --> User
 ```
+**Explicación:**  
+- El usuario de cada empresa se conecta y accede a la web.
+- La web (Astro) consulta y muestra datos desde Supabase (base de datos y autenticación).
+- El estado y la ubicación de las canchas se visualizan en un mapa interactivo.
+- Las acciones (validar, rechazar, firmar) actualizan el estado en Supabase y se reflejan en tiempo real en la interfaz.
+
+---
 
 ## Tecnologías consideradas
 
@@ -36,6 +55,8 @@ flowchart TD
 - **Supabase**: Backend como servicio, provee autenticación, base de datos (PostgreSQL), y APIs automáticas.
 - **Leaflet.js / MapLibre**: Para visualización interactiva de mapas y ubicación de canchas.
 - **Control de acceso**: Cada empresa accede sólo a sus procesos y acciones.
+
+---
 
 ## Objetivo
 
