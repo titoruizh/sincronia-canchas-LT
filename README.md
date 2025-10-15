@@ -33,10 +33,10 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    User[Usuario\nEmpresa] --> WebPanel[Web App\nAstro]
-    WebPanel --> Supabase[Supabase]
-    WebPanel --> MapComponent[Componente Mapa]
-    WebPanel --> Accion[Acciones\n(validar, rechazar, firmar)]
+    User --> WebPanel
+    WebPanel --> Supabase
+    WebPanel --> Mapa
+    WebPanel --> Accion
     Accion --> Supabase
     Supabase --> WebPanel
     WebPanel --> User
