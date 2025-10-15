@@ -33,33 +33,13 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph Frontend
-        Astro[Astro App]
-        Login[Login/Registro]
-        Dashboard[Dashboard por Empresa]
-        Mapa[Mapa interactivo]
-        Acciones[Botones de Acción]
-    end
-    subgraph Backend
-        SupabaseAuth[Supabase Auth]
-        SupabaseDB[Supabase DB]
-        Storage[Supabase Storage]
-        API[Supabase API REST]
-    end
-    User[Usuario Empresa] --> Login
-    Login -->|Credenciales| SupabaseAuth
-    SupabaseAuth -->|Token sesión| Astro
-    Astro --> Dashboard
-    Dashboard --> Mapa
-    Dashboard --> Acciones
-    Mapa -->|Ubicación/Estado| SupabaseDB
-    Acciones -->|Validar, rechazar, firmar| API
-    API --> SupabaseDB
-    SupabaseDB --> Dashboard
-    Acciones --> Storage
-    Storage --> SupabaseDB
-    SupabaseDB --> Dashboard
-    Dashboard --> User
+    Usuario -->|Accede vía navegador| AstroWeb[Astro Web]
+    AstroWeb -->|Solicita login| SupabaseAuth[Supabase Auth]
+    SupabaseAuth -->|Devuelve acceso| AstroWeb
+    AstroWeb -->|Consulta datos| SupabaseDB[Supabase BD]
+    AstroWeb -->|Muestra mapa| Mapa[Componente de mapas]
+    AstroWeb -->|Permite acciones (validar, firmar, etc)| SupabaseDB
+    SupabaseDB -->|Actualiza estado| AstroWeb
 ```
 **Explicación:**  
 - El usuario de cada empresa se conecta y accede a la web.
