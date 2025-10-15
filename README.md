@@ -10,15 +10,15 @@ Este proyecto busca digitalizar y transparentar el flujo de trabajo de validaci�
 
 ```mermaid
 flowchart TD
-    AA[AngloAmerican\nMandante] --> BES[Besalco\nMaquinarias]
-    BES --> LIN[Linkapsis\nTopografía]
+    AA1[AngloAmerican Mandante] --> BES[Besalco Maquinarias]
+    BES --> LIN[Linkapsis Topografía]
     LIN --> LINCheck{Espesores OK?}
-    LINCheck -- Sí --> LLA[LlayLlay\nLaboratorio]
+    LINCheck -- Sí --> LLA[LlayLlay Laboratorio]
     LINCheck -- No --> BES
     LLA --> LLAValida{Densidad OK?}
-    LLAValida -- Sí --> AA
+    LLAValida -- Sí --> AA2[AngloAmerican Firma]
     LLAValida -- No --> BES
-    AA --> END[Cancha cerrada]
+    AA2 --> CC[Cancha Cerrada]
 ```
 **Explicación:**  
 1. AngloAmerican solicita la habilitación de una cancha.
