@@ -33,35 +33,36 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Usuario -->|Accede vía navegador| AstroWeb[Astro Web]
-    AstroWeb -->|Solicita login| SupabaseAuth[Supabase Auth]
-    SupabaseAuth -->|Devuelve acceso| AstroWeb
-    AstroWeb -->|Consulta datos| SupabaseDB[Supabase BD]
-    AstroWeb -->|Muestra mapa| Mapa[Componente de mapas]
-    AstroWeb -->|Permite acciones (validar, firmar, etc)| SupabaseDB
-    SupabaseDB -->|Actualiza estado| AstroWeb
+    Usuario --> Astro
+    Astro --> SupabaseAuth
+    SupabaseAuth --> Astro
+    Astro --> SupabaseDB
+    Astro --> Mapa
+    Astro --> Acciones
+    Acciones --> SupabaseDB
+    SupabaseDB --> Astro
+    Astro --> Usuario
 ```
-**Explicación:**  
-- El usuario de cada empresa se conecta y accede a la web.
-- La web (Astro) consulta y muestra datos desde Supabase (base de datos y autenticación).
-- El estado y la ubicación de las canchas se visualizan en un mapa interactivo.
-- Las acciones (validar, rechazar, firmar) actualizan el estado en Supabase y se reflejan en tiempo real en la interfaz.
+
+**Leyenda:**
+- **Usuario:** Persona de cualquier empresa que accede a la web.
+- **Astro:** Aplicación web principal (frontend).
+- **SupabaseAuth:** Servicio de autenticación de usuarios.
+- **SupabaseDB:** Base de datos con la información de canchas, estados, historial, etc.
+- **Mapa:** Componente para mostrar ubicación y estado de canchas.
+- **Acciones:** Validar, rechazar, firmar, cerrar, etc.
 
 ---
 
 ## Tecnologías consideradas
 
-- **Astro**: Framework moderno para frontend, permite crear una web rápida y visual.
-- **Supabase**: Backend como servicio, provee autenticación, base de datos (PostgreSQL), y APIs automáticas.
-- **Leaflet.js / MapLibre**: Para visualización interactiva de mapas y ubicación de canchas.
-- **Control de acceso**: Cada empresa accede sólo a sus procesos y acciones.
+- **Astro:** Framework moderno para el frontend.
+- **Supabase:** Backend como servicio, autenticación y base de datos.
+- **Leaflet.js / MapLibre:** Visualización de mapas.
+- **Control de acceso:** Cada empresa accede solo a su información y acciones.
 
 ---
 
 ## Objetivo
 
 Centralizar el seguimiento y validación del proceso de trabajo de canchas, permitiendo a cada empresa interactuar y validar los hitos, con trazabilidad y visualización en tiempo real sobre el mapa.
-
----
-
-Este README sirve como contexto inicial. Si el proyecto avanza, aquí se irá documentando el desarrollo, estructura y decisiones técnicas.
