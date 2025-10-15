@@ -6,6 +6,13 @@ Este proyecto busca digitalizar y transparentar el flujo de trabajo de validaci�
 
 ---
 
+
+## Objetivo
+
+Centralizar el seguimiento y validación del proceso de trabajo de canchas, permitiendo a cada empresa interactuar y validar los hitos, con trazabilidad y visualización en tiempo real sobre el mapa.
+
+---
+
 ## Diagrama general del proceso entre empresas
 
 ```mermaid
@@ -63,6 +70,3 @@ flowchart TD
 
 ---
 
-## Objetivo
-
-Centralizar el seguimiento y validación del proceso de trabajo de canchas, permitiendo a cada empresa interactuar y validar los hitos, con trazabilidad y visualización en tiempo real sobre el mapa.
